@@ -12,7 +12,6 @@ namespace APIVerve.API.SpellChecker
     {
         /// <summary>
         /// The text to check the spelling of
-        /// Example: The quick brown fox jumps over the lazy dog
         /// </summary>
         [JsonProperty("text")]
         public string Text { get; set; }
