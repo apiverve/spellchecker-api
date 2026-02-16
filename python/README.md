@@ -239,8 +239,9 @@ from apiverve_spellchecker.apiClient import SpellcheckerAPIClient
 
 api = SpellcheckerAPIClient("[YOUR_API_KEY]")
 
+query = { "text": "I neeed to call my friend on telephine today!" }
+
 try:
-    query = { "text": "I neeed to call my friend on telephine today!" }
     result = api.execute(query)
     print(result)
 finally:
