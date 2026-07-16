@@ -25,15 +25,18 @@ namespace APIVerve.API.SpellChecker
 
         [JsonProperty("data")]
         public Data Data { get; set; }
+
+        [JsonProperty("premium")]
+        public Premium Premium { get; set; }
     }
 
     public partial class Data
     {
         [JsonProperty("spellPass")]
-        public bool SpellPass { get; set; }
+        public bool? SpellPass { get; set; }
 
         [JsonProperty("mispellingsFound")]
-        public long MispellingsFound { get; set; }
+        public long? MispellingsFound { get; set; }
 
         [JsonProperty("corrections")]
         public Correction[] Corrections { get; set; }
@@ -46,5 +49,17 @@ namespace APIVerve.API.SpellChecker
 
         [JsonProperty("suggestions")]
         public string[] Suggestions { get; set; }
+    }
+
+    public partial class Premium
+    {
+        [JsonProperty("message")]
+        public string Message { get; set; }
+
+        [JsonProperty("upgrade_url")]
+        public Uri UpgradeUrl { get; set; }
+
+        [JsonProperty("locked_fields")]
+        public string[] LockedFields { get; set; }
     }
 }
