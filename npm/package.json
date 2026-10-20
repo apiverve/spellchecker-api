@@ -1,7 +1,7 @@
 {
   "name": "@apiverve/spellchecker",
-  "version": "1.2.0",
-  "description": "Spell Checker is a simple tool for checking spelling in a given body of text. It returns correction suggestions",
+  "version": "1.2.2",
+  "description": "Spell Checker flags misspelled words in submitted English text and generates correction suggestions. It counts total spelling errors and lists possible replacements for each mistaken word.",
   "main": "index.js",
   "types": "index.d.ts",
   "sideEffects": false,
@@ -23,7 +23,7 @@
     "directory": "npm"
   },
   "keywords": [
-    "spell checker", "spell check", "spell checker api", "spell check api", "spell checker tool"
+    "spell check api", "spell checker api", "spell check api correct text", "api to check spelling", "spelling correction api"
   ],
   "author": {
     "name": "APIVerve",
@@ -34,7 +34,7 @@
   "bugs": {
     "url": "https://github.com/apiverve/spellchecker-api/issues"
   },
-  "homepage": "https://apiverve.com/marketplace/spellchecker?utm_source=npm&utm_medium=homepage",
+  "homepage": "https://apiverve.com/marketplace/spellchecker?utm_source=npm&utm_medium=referral&utm_content=homepage",
   "devDependencies": {
     "mocha": "^11.0.1",
     "chai": "^5.1.2",

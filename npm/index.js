@@ -30,7 +30,7 @@ class spellcheckerWrapper {
         this.baseURL = 'https://api.apiverve.com/v1/spellchecker';
 
         // Validation rules for parameters (generated from schema)
-        this.validationRules = {"text":{"type":"string","required":true}};
+        this.validationRules = {"text":{"type":"string","required":true,"maxLength":50000}};
     }
 
     /**
