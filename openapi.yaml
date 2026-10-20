@@ -2,8 +2,9 @@ openapi: 3.0.4
 info:
   title: Spell Checker
   description: >-
-    Spell Checker is a simple tool for checking spelling in a given body of
-    text. It returns correction suggestions
+    Spell Checker flags misspelled words in submitted English text and generates
+    correction suggestions. It counts total spelling errors and lists possible
+    replacements for each mistaken word.
   termsOfService: https://apiverve.com/terms/
   contact:
     name: APIVerve Support
@@ -18,7 +19,7 @@ servers:
 paths:
   /v1/spellchecker:
     post:
-      summary: Check Spelling
+      summary: Spell Checker
       description: Check the spelling of a body of text
       operationId: spellchecker
       parameters: []

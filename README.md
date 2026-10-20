@@ -1,13 +1,13 @@
-# [Spell Checker API](https://apiverve.com/marketplace/spellchecker?utm_source&#x3D;github&amp;utm_medium&#x3D;readme)
+# [Spell Checker API](https://apiverve.com/marketplace/spellchecker?utm_source&#x3D;github&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;readme)
 
-Spell Checker is a simple tool for checking spelling in a given body of text. It returns correction suggestions
+Spell Checker flags misspelled words in submitted English text and generates correction suggestions. It counts total spelling errors and lists possible replacements for each mistaken word.
 
 The Spell Checker API provides a simple, reliable way to integrate spell checker functionality into your applications. Built for developers who need production-ready spell checker capabilities without the complexity of building from scratch.
 
-**[View API Details →](https://apiverve.com/marketplace/spellchecker?utm_source&#x3D;github&amp;utm_medium&#x3D;readme)**
+**[View API Details →](https://apiverve.com/marketplace/spellchecker?utm_source&#x3D;github&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;readme)**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![API Status](https://img.shields.io/badge/Status-Active-green.svg)](https://apiverve.com/marketplace/spellchecker?utm_source&#x3D;github&amp;utm_medium&#x3D;readme)
+[![API Status](https://img.shields.io/badge/Status-Active-green.svg)](https://apiverve.com/marketplace/spellchecker?utm_source&#x3D;github&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;readme)
 [![Method](https://img.shields.io/badge/Method-POST-blue.svg)](#)
 [![Platform](https://img.shields.io/badge/Platform-Multi--Platform-orange.svg)](#installation)
 
@@ -167,7 +167,7 @@ go get github.com/apiverve/spellchecker-api/go
 
 ## Documentation
 
-- 🏠 **API Home:** [Spell Checker API](https://apiverve.com/marketplace/spellchecker?utm_source&#x3D;github&amp;utm_medium&#x3D;readme)
+- 🏠 **API Home:** [Spell Checker API](https://apiverve.com/marketplace/spellchecker?utm_source&#x3D;github&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;readme)
 - 📚 **API Reference:** [docs.apiverve.com/ref/spellchecker](https://docs.apiverve.com/ref/spellchecker)
 - 📖 **OpenAPI Spec:** [openapi.yaml](./openapi.yaml)
 - 💡 **Examples:** [examples/](./examples/)
@@ -197,11 +197,51 @@ x-api-key: YOUR_API_KEY_HERE
 Get your API key: [https://apiverve.com](https://apiverve.com)
 
 ### Response Format
-All responses are JSON with this structure:
+
+Every APIVerve endpoint returns the same envelope — check `status`, then read `data`:
+
 ```json
 {
   "status": "ok",
+  "error": null,
   "data": { ... }
+}
+```
+
+### Example Response
+
+A real response from the Spell Checker API:
+
+```json
+{
+  "status": "ok",
+  "error": null,
+  "data": {
+    "spellPass": false,
+    "mispellingsFound": 2,
+    "corrections": [
+      {
+        "word": "neeed",
+        "suggestions": [
+          "needed",
+          "need",
+          "needy",
+          "Neel",
+          "needs"
+        ]
+      },
+      {
+        "word": "telephine",
+        "suggestions": [
+          "telephone",
+          "telephoned",
+          "telephoner",
+          "telephones",
+          "telephony"
+        ]
+      }
+    ]
+  }
 }
 ```
 
@@ -209,7 +249,7 @@ All responses are JSON with this structure:
 
 ## Support & Community
 
-- 🏠 **API Home**: [Spell Checker API](https://apiverve.com/marketplace/spellchecker?utm_source&#x3D;github&amp;utm_medium&#x3D;readme)
+- 🏠 **API Home**: [Spell Checker API](https://apiverve.com/marketplace/spellchecker?utm_source&#x3D;github&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;readme)
 - 💬 **Support**: [https://apiverve.com/contact](https://apiverve.com/contact)
 - 🐛 **Issues**: [GitHub Issues](../../issues)
 - 📖 **Documentation**: [https://docs.apiverve.com](https://docs.apiverve.com)
