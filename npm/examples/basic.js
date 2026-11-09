@@ -15,7 +15,9 @@ const api = new spellcheckerAPI({
 
 // Example query
 var query = {
-  "text": "I neeed to call my friend on telephine today!"
+  "text": "I neeed to call my friend on telephine today!",
+  "autocorrect": true,
+  "offsets": true
 };
 
 // Make the API request using callback

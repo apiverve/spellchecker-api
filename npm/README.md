@@ -1,6 +1,6 @@
 # Spell Checker API
 
-Spell Checker flags misspelled words in submitted English text and generates correction suggestions. It counts total spelling errors and lists possible replacements for each mistaken word.
+Spell Checker flags misspelled words in submitted English text and generates correction suggestions. It counts total spelling errors, lists possible replacements for each mistaken word, and can return the text with the top suggestions applied, plus on paid plans the character offsets of every misspelling.
 
 [![npm version](https://img.shields.io/npm/v/@apiverve/spellchecker.svg)](https://www.npmjs.com/package/@apiverve/spellchecker)
 
@@ -57,7 +57,9 @@ Using the API is simple. All you have to do is make a request. The API will retu
 
 ```javascript
 var query = {
-  "text": "I neeed to call my friend on telephine today!"
+  "text": "I neeed to call my friend on telephine today!",
+  "autocorrect": true,
+  "offsets": true
 };
 
 api.execute(query, function (error, data) {
@@ -77,7 +79,9 @@ You can also use promises to make requests. The API returns a promise that you c
 
 ```javascript
 var query = {
-  "text": "I neeed to call my friend on telephine today!"
+  "text": "I neeed to call my friend on telephine today!",
+  "autocorrect": true,
+  "offsets": true
 };
 
 api.execute(query)
@@ -98,7 +102,9 @@ You can also use async/await to make requests. The API returns a promise that yo
 ```javascript
 async function makeRequest() {
     var query = {
-  "text": "I neeed to call my friend on telephine today!"
+  "text": "I neeed to call my friend on telephine today!",
+  "autocorrect": true,
+  "offsets": true
 };
 
     try {
@@ -121,6 +127,7 @@ async function makeRequest() {
   "data": {
     "spellPass": false,
     "mispellingsFound": 2,
+    "totalOccurrences": 2,
     "corrections": [
       {
         "word": "neeed",
@@ -130,6 +137,13 @@ async function makeRequest() {
           "needy",
           "Neel",
           "needs"
+        ],
+        "occurrences": 1,
+        "offsets": [
+          {
+            "start": 2,
+            "end": 7
+          }
         ]
       },
       {
@@ -140,9 +154,17 @@ async function makeRequest() {
           "telephoner",
           "telephones",
           "telephony"
+        ],
+        "occurrences": 1,
+        "offsets": [
+          {
+            "start": 29,
+            "end": 38
+          }
         ]
       }
-    ]
+    ],
+    "correctedText": "I needed to call my friend on telephone today!"
   }
 }
 ```

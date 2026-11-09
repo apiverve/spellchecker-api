@@ -27,12 +27,21 @@ declare module '@apiverve/spellchecker' {
   interface SpellCheckerData {
       spellPass:        boolean | null;
       mispellingsFound: number | null;
+      totalOccurrences: number | null;
       corrections:      Correction[];
+      correctedText:    null | string;
   }
   
   interface Correction {
       word:        null | string;
       suggestions: (null | string)[];
+      occurrences: number | null;
+      offsets:     Offset[];
+  }
+  
+  interface Offset {
+      start: number | null;
+      end:   number | null;
   }
 
   export default class spellcheckerWrapper {
