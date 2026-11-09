@@ -10,7 +10,7 @@ module APIVerve
     #
     # @example Basic usage
     #   client = APIVerve::Spellchecker::Client.new(api_key: "your_api_key")
-    #   response = client.execute({ text: "I neeed to call my friend on telephine today!" })
+    #   response = client.execute({ text: "I neeed to call my friend on telephine today!", autocorrect: true, offsets: true })
     #   puts response
     #
     # @see https://apiverve.com/marketplace/spellchecker?utm_source=ruby&utm_medium=referral&utm_content=readme
@@ -19,7 +19,7 @@ module APIVerve
       DEFAULT_TIMEOUT = 30
 
       # Validation rules for parameters
-      VALIDATION_RULES = { 'text' => { type: 'string', required: true, max_length: 50000 } }
+      VALIDATION_RULES = { 'text' => { type: 'string', required: true, max_length: 50000 }, 'autocorrect' => { type: 'boolean', required: false }, 'offsets' => { type: 'boolean', required: false } }
 
       # Format validation patterns
       FORMAT_PATTERNS = {
