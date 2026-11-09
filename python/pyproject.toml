@@ -1,10 +1,10 @@
 [project]
 name = "apiverve-spellchecker"
-version = "1.2.4"
+version = "1.2.5"
 authors = [
   { name="APIVerve", email="hello@apiverve.com" },
 ]
-description = "Spell Checker flags misspelled words in submitted English text and generates correction suggestions. It counts total spelling errors and lists possible replacements for each mistaken word."
+description = "Spell Checker flags misspelled words in submitted English text and generates correction suggestions. It counts total spelling errors, lists possible replacements for each mistaken word, and can return the text with the top suggestions applied, plus on paid plans the character offsets of every misspelling."
 keywords = ["spell check api", "spell checker api", "spell check api correct text", "api to check spelling", "spelling correction api"]
 readme = "README.md"
 requires-python = ">=3.9"

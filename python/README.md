@@ -1,7 +1,7 @@
 Spell Checker API
 ============
 
-Spell Checker flags misspelled words in submitted English text and generates correction suggestions. It counts total spelling errors and lists possible replacements for each mistaken word.
+Spell Checker flags misspelled words in submitted English text and generates correction suggestions. It counts total spelling errors, lists possible replacements for each mistaken word, and can return the text with the top suggestions applied, plus on paid plans the character offsets of every misspelling.
 
 
 [![PyPI version](https://img.shields.io/pypi/v/apiverve-spellchecker.svg)](https://pypi.org/project/apiverve-spellchecker/)
@@ -43,7 +43,11 @@ from apiverve_spellchecker.apiClient import SpellcheckerAPIClient
 # Initialize the client with your APIVerve API key
 api = SpellcheckerAPIClient("[YOUR_API_KEY]")
 
-query = { "text": "I neeed to call my friend on telephine today!" }
+query = {
+    "text": "I neeed to call my friend on telephine today!",
+    "autocorrect": true,
+    "offsets": true
+}
 
 try:
     # Make the API call
@@ -81,7 +85,11 @@ Using the API client, you can perform requests to the API.
 ###### Define Query
 
 ```python
-query = { "text": "I neeed to call my friend on telephine today!" }
+query = {
+    "text": "I neeed to call my friend on telephine today!",
+    "autocorrect": true,
+    "offsets": true
+}
 ```
 
 ###### Simple Request
@@ -103,6 +111,7 @@ print(result)
   "data": {
     "spellPass": false,
     "mispellingsFound": 2,
+    "totalOccurrences": 2,
     "corrections": [
       {
         "word": "neeed",
@@ -112,6 +121,13 @@ print(result)
           "needy",
           "Neel",
           "needs"
+        ],
+        "occurrences": 1,
+        "offsets": [
+          {
+            "start": 2,
+            "end": 7
+          }
         ]
       },
       {
@@ -122,9 +138,17 @@ print(result)
           "telephoner",
           "telephones",
           "telephony"
+        ],
+        "occurrences": 1,
+        "offsets": [
+          {
+            "start": 29,
+            "end": 38
+          }
         ]
       }
-    ]
+    ],
+    "correctedText": "I needed to call my friend on telephone today!"
   }
 }
 ```
@@ -142,7 +166,11 @@ from apiverve_spellchecker.apiClient import SpellcheckerAPIClient, SpellcheckerA
 
 api = SpellcheckerAPIClient("[YOUR_API_KEY]")
 
-query = { "text": "I neeed to call my friend on telephine today!" }
+query = {
+    "text": "I neeed to call my friend on telephine today!",
+    "autocorrect": true,
+    "offsets": true
+}
 
 try:
     result = api.execute(query)
@@ -163,7 +191,11 @@ from apiverve_spellchecker.apiClient import SpellcheckerAPIClient, SpellcheckerA
 
 api = SpellcheckerAPIClient("[YOUR_API_KEY]")
 
-query = { "text": "I neeed to call my friend on telephine today!" }
+query = {
+    "text": "I neeed to call my friend on telephine today!",
+    "autocorrect": true,
+    "offsets": true
+}
 
 try:
     result = api.execute(query)
@@ -197,7 +229,11 @@ The client supports the context manager protocol for automatic resource cleanup:
 ```python
 from apiverve_spellchecker.apiClient import SpellcheckerAPIClient, SpellcheckerAPIClientError
 
-query = { "text": "I neeed to call my friend on telephine today!" }
+query = {
+    "text": "I neeed to call my friend on telephine today!",
+    "autocorrect": true,
+    "offsets": true
+}
 
 # Using context manager ensures proper cleanup
 with SpellcheckerAPIClient("[YOUR_API_KEY]") as api:
@@ -223,7 +259,11 @@ from apiverve_spellchecker.apiClient import SpellcheckerAPIClient
 # Enable debug mode
 api = SpellcheckerAPIClient("[YOUR_API_KEY]", debug=True)
 
-query = { "text": "I neeed to call my friend on telephine today!" }
+query = {
+    "text": "I neeed to call my friend on telephine today!",
+    "autocorrect": true,
+    "offsets": true
+}
 
 # Debug information will be printed to console
 result = api.execute(query)
@@ -238,7 +278,11 @@ from apiverve_spellchecker.apiClient import SpellcheckerAPIClient
 
 api = SpellcheckerAPIClient("[YOUR_API_KEY]")
 
-query = { "text": "I neeed to call my friend on telephine today!" }
+query = {
+    "text": "I neeed to call my friend on telephine today!",
+    "autocorrect": true,
+    "offsets": true
+}
 
 try:
     result = api.execute(query)

@@ -24,7 +24,9 @@ class ValidationError(SpellcheckerAPIClientError):
 class SpellcheckerAPIClient:
     # Validation rules for parameters (generated from schema)
     VALIDATION_RULES = {
-        "text": {"type": "string", "required": True, "maxLength": 50000}
+        "text": {"type": "string", "required": True, "maxLength": 50000},
+        "autocorrect": {"type": "boolean", "required": False, "default": False},
+        "offsets": {"type": "boolean", "required": False, "default": False}
     }
 
     # Format validation patterns
