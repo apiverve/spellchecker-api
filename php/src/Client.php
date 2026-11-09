@@ -15,7 +15,7 @@ use APIVerve\Spellchecker\Exceptions\ValidationException;
  * @example Basic usage
  * ```php
  * $client = new Client('your_api_key');
- * $response = $client->execute(['text' => 'I neeed to call my friend on telephine today!']);
+ * $response = $client->execute(['text' => 'I neeed to call my friend on telephine today!', 'autocorrect' => true, 'offsets' => true]);
  * print_r($response);
  * ```
  *
@@ -34,7 +34,9 @@ class Client
      * Validation rules for parameters
      */
     private const VALIDATION_RULES = [
-        'text' => ['type' => 'string', 'required' => true, 'maxLength' => 50000]
+        'text' => ['type' => 'string', 'required' => true, 'maxLength' => 50000],
+        'autocorrect' => ['type' => 'boolean', 'required' => false],
+        'offsets' => ['type' => 'boolean', 'required' => false]
     ];
 
     /**

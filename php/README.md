@@ -1,6 +1,6 @@
 # Spell Checker API - PHP Package
 
-Spell Checker flags misspelled words in submitted English text and generates correction suggestions. It counts total spelling errors and lists possible replacements for each mistaken word.
+Spell Checker flags misspelled words in submitted English text and generates correction suggestions. It counts total spelling errors, lists possible replacements for each mistaken word, and can return the text with the top suggestions applied, plus on paid plans the character offsets of every misspelling.
 
 ## Installation
 
@@ -27,7 +27,11 @@ use APIVerve\Spellchecker\Client;
 $client = new Client('YOUR_API_KEY');
 
 // Make a request
-$response = $client->execute(['text' => 'I neeed to call my friend on telephine today!']);
+$response = $client->execute([
+    'text' => 'I neeed to call my friend on telephine today!',
+    'autocorrect' => true,
+    'offsets' => true
+]);
 
 // Print the response
 print_r($response);
@@ -42,7 +46,7 @@ use APIVerve\Spellchecker\Exceptions\APIException;
 use APIVerve\Spellchecker\Exceptions\ValidationException;
 
 try {
-    $response = $client->execute(['text' => 'I neeed to call my friend on telephine today!']);
+    $response = $client->execute(['text' => 'I neeed to call my friend on telephine today!', 'autocorrect' => true, 'offsets' => true]);
     print_r($response['data']);
 } catch (ValidationException $e) {
     echo "Validation error: " . implode(', ', $e->getErrors());
@@ -71,6 +75,7 @@ $client = new Client(
   "data": {
     "spellPass": false,
     "mispellingsFound": 2,
+    "totalOccurrences": 2,
     "corrections": [
       {
         "word": "neeed",
@@ -80,6 +85,13 @@ $client = new Client(
           "needy",
           "Neel",
           "needs"
+        ],
+        "occurrences": 1,
+        "offsets": [
+          {
+            "start": 2,
+            "end": 7
+          }
         ]
       },
       {
@@ -90,9 +102,17 @@ $client = new Client(
           "telephoner",
           "telephones",
           "telephony"
+        ],
+        "occurrences": 1,
+        "offsets": [
+          {
+            "start": 29,
+            "end": 38
+          }
         ]
       }
-    ]
+    ],
+    "correctedText": "I needed to call my friend on telephone today!"
   }
 }
 ```
