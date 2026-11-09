@@ -15,6 +15,8 @@ public class BasicExample {
             // Request body
             Map&lt;String, Object&gt; parameters &#x3D; new HashMap&lt;&gt;();
         parameters.put(&quot;text&quot;, &quot;I neeed to call my friend on telephine today!&quot;);
+        parameters.put(&quot;autocorrect&quot;, true);
+        parameters.put(&quot;offsets&quot;, true);
 
             // Execute the API request
             APIResponse response = client.execute(parameters);

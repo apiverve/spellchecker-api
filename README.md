@@ -1,6 +1,6 @@
 # [Spell Checker API](https://apiverve.com/marketplace/spellchecker?utm_source&#x3D;github&amp;utm_medium&#x3D;referral&amp;utm_content&#x3D;readme)
 
-Spell Checker flags misspelled words in submitted English text and generates correction suggestions. It counts total spelling errors and lists possible replacements for each mistaken word.
+Spell Checker flags misspelled words in submitted English text and generates correction suggestions. It counts total spelling errors, lists possible replacements for each mistaken word, and can return the text with the top suggestions applied, plus on paid plans the character offsets of every misspelling.
 
 The Spell Checker API provides a simple, reliable way to integrate spell checker functionality into your applications. Built for developers who need production-ready spell checker capabilities without the complexity of building from scratch.
 
@@ -31,7 +31,9 @@ The Spell Checker API provides a simple, reliable way to integrate spell checker
 async function callSpellCheckerAPI() {
     try {
         const requestBody = {
-    "text": "I neeed to call my friend on telephine today!"
+    "text": "I neeed to call my friend on telephine today!",
+    "autocorrect": true,
+    "offsets": true
 };
 
         const response = await fetch('https://api.apiverve.com/v1/spellchecker', {
@@ -60,7 +62,9 @@ curl -X POST "https://api.apiverve.com/v1/spellchecker" \
   -H "x-api-key: YOUR_API_KEY_HERE" \
   -H "Content-Type: application/json" \
   -d '{
-    "text": "I neeed to call my friend on telephine today!"
+    "text": "I neeed to call my friend on telephine today!",
+    "autocorrect": true,
+    "offsets": true
 }'
 ```
 
@@ -219,6 +223,7 @@ A real response from the Spell Checker API:
   "data": {
     "spellPass": false,
     "mispellingsFound": 2,
+    "totalOccurrences": 2,
     "corrections": [
       {
         "word": "neeed",
@@ -228,6 +233,13 @@ A real response from the Spell Checker API:
           "needy",
           "Neel",
           "needs"
+        ],
+        "occurrences": 1,
+        "offsets": [
+          {
+            "start": 2,
+            "end": 7
+          }
         ]
       },
       {
@@ -238,9 +250,17 @@ A real response from the Spell Checker API:
           "telephoner",
           "telephones",
           "telephony"
+        ],
+        "occurrences": 1,
+        "offsets": [
+          {
+            "start": 29,
+            "end": 38
+          }
         ]
       }
-    ]
+    ],
+    "correctedText": "I needed to call my friend on telephone today!"
   }
 }
 ```

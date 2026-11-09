@@ -15,7 +15,9 @@ async function callSpellCheckerAPI() {
   try {
     // Request body
     const requestBody &#x3D; {
-    &quot;text&quot;: &quot;I neeed to call my friend on telephine today!&quot;
+    &quot;text&quot;: &quot;I neeed to call my friend on telephine today!&quot;,
+    &quot;autocorrect&quot;: true,
+    &quot;offsets&quot;: true
 };
 
     const response = await fetch(API_URL, {

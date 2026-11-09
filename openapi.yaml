@@ -3,8 +3,10 @@ info:
   title: Spell Checker
   description: >-
     Spell Checker flags misspelled words in submitted English text and generates
-    correction suggestions. It counts total spelling errors and lists possible
-    replacements for each mistaken word.
+    correction suggestions. It counts total spelling errors, lists possible
+    replacements for each mistaken word, and can return the text with the top
+    suggestions applied, plus on paid plans the character offsets of every
+    misspelling.
   termsOfService: https://apiverve.com/terms/
   contact:
     name: APIVerve Support
@@ -20,7 +22,9 @@ paths:
   /v1/spellchecker:
     post:
       summary: Spell Checker
-      description: Check the spelling of a body of text
+      description: >-
+        Check the spelling of a body of text, optionally returning the
+        autocorrected text and the position of each misspelling
       operationId: spellchecker
       parameters: []
       responses:
@@ -46,6 +50,7 @@ paths:
                 data:
                   spellPass: false
                   mispellingsFound: 2
+                  totalOccurrences: 2
                   corrections:
                     - word: neeed
                       suggestions:
@@ -54,6 +59,10 @@ paths:
                         - needy
                         - Neel
                         - needs
+                      occurrences: 1
+                      offsets:
+                        - start: 2
+                          end: 7
                     - word: telephine
                       suggestions:
                         - telephone
@@ -61,6 +70,11 @@ paths:
                         - telephoner
                         - telephones
                         - telephony
+                      occurrences: 1
+                      offsets:
+                        - start: 29
+                          end: 38
+                  correctedText: I needed to call my friend on telephone today!
         '401':
           description: Your request was not authorized, or your API Key was invalid
         '404':
@@ -77,6 +91,16 @@ paths:
                 text:
                   type: string
                   description: The text to check the spelling of
+                autocorrect:
+                  type: boolean
+                  description: >-
+                    Include correctedText, the submitted text with each
+                    misspelling replaced by its first suggestion
+                offsets:
+                  type: boolean
+                  description: >-
+                    Include the start and end character position of every
+                    occurrence of each misspelled word
               required:
                 - text
 components:
@@ -89,3 +113,5 @@ security:
   - api_key: []
 sampleRequest:
   text: I neeed to call my friend on telephine today!
+  autocorrect: true
+  offsets: true

@@ -30,7 +30,7 @@ namespace APIVerve.Examples
                 client.DefaultRequestHeaders.Add("x-api-key", API_KEY);
 
                 // Request body
-                var requestBody &#x3D; new { text &#x3D; &quot;I neeed to call my friend on telephine today!&quot; };
+                var requestBody &#x3D; new { text &#x3D; &quot;I neeed to call my friend on telephine today!&quot;, autocorrect &#x3D; true, offsets &#x3D; true };
 
                 var jsonContent = JsonSerializer.Serialize(requestBody);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");

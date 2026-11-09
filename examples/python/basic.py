@@ -19,7 +19,9 @@ def call_spellchecker_api():
     try:
         # Request body
         request_body &#x3D; {
-    &#x27;text&#x27;: &#x27;I neeed to call my friend on telephine today!&#x27;
+    &#x27;text&#x27;: &#x27;I neeed to call my friend on telephine today!&#x27;,
+    &#x27;autocorrect&#x27;: true,
+    &#x27;offsets&#x27;: true
 }
 
         headers = {
