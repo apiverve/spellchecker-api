@@ -1,7 +1,7 @@
 Spell Checker API
 ============
 
-Spell Checker flags misspelled words in submitted English text and generates correction suggestions. It counts total spelling errors and lists possible replacements for each mistaken word.
+Spell Checker flags misspelled words in submitted English text and generates correction suggestions. It counts total spelling errors, lists possible replacements for each mistaken word, and can return the text with the top suggestions applied, plus on paid plans the character offsets of every misspelling.
 
 
 [![NuGet version](https://img.shields.io/nuget/v/APIVerve.API.SpellChecker.svg)](https://www.nuget.org/packages/APIVerve.API.SpellChecker)
@@ -60,7 +60,9 @@ class Program
         var apiClient = new SpellCheckerAPIClient("[YOUR_API_KEY]");
 
         var queryOptions = new SpellCheckerQueryOptions {
-            Text = "I neeed to call my friend on telephine today!"
+            Text = "I neeed to call my friend on telephine today!",
+            Autocorrect = true,
+            Offsets = true
         };
 
         // Make the API call
@@ -124,7 +126,9 @@ public class Example
         var apiClient = new SpellCheckerAPIClient("[YOUR_API_KEY]");
 
         var queryOptions = new SpellCheckerQueryOptions {
-            Text = "I neeed to call my friend on telephine today!"
+            Text = "I neeed to call my friend on telephine today!",
+            Autocorrect = true,
+            Offsets = true
         };
 
         var response = await apiClient.ExecuteAsync(queryOptions);
@@ -156,7 +160,9 @@ public class Example
         var apiClient = new SpellCheckerAPIClient("[YOUR_API_KEY]");
 
         var queryOptions = new SpellCheckerQueryOptions {
-            Text = "I neeed to call my friend on telephine today!"
+            Text = "I neeed to call my friend on telephine today!",
+            Autocorrect = true,
+            Offsets = true
         };
 
         var response = apiClient.Execute(queryOptions);
@@ -193,7 +199,9 @@ public class Example
         var apiClient = new SpellCheckerAPIClient("[YOUR_API_KEY]");
 
         var queryOptions = new SpellCheckerQueryOptions {
-            Text = "I neeed to call my friend on telephine today!"
+            Text = "I neeed to call my friend on telephine today!",
+            Autocorrect = true,
+            Offsets = true
         };
 
         try
@@ -249,7 +257,9 @@ public class Example
         apiClient.SetRetryDelay(2000);     // Wait 2 seconds between retries
 
         var queryOptions = new SpellCheckerQueryOptions {
-            Text = "I neeed to call my friend on telephine today!"
+            Text = "I neeed to call my friend on telephine today!",
+            Autocorrect = true,
+            Offsets = true
         };
 
         try
@@ -290,7 +300,9 @@ apiClient.AddCustomHeader("X-Custom-Header", "custom-value");
 apiClient.AddCustomHeader("X-Request-ID", Guid.NewGuid().ToString());
 
 var queryOptions = new SpellCheckerQueryOptions {
-    Text = "I neeed to call my friend on telephine today!"
+    Text = "I neeed to call my friend on telephine today!",
+    Autocorrect = true,
+    Offsets = true
 };
 
 var response = await apiClient.ExecuteAsync(queryOptions);
@@ -316,7 +328,9 @@ apiClient.SetLogger(message =>
 });
 
 var queryOptions = new SpellCheckerQueryOptions {
-    Text = "I neeed to call my friend on telephine today!"
+    Text = "I neeed to call my friend on telephine today!",
+    Autocorrect = true,
+    Offsets = true
 };
 
 var response = await apiClient.ExecuteAsync(queryOptions);
@@ -334,7 +348,9 @@ apiClient.SetMaxRetries(3);           // Retry up to 3 times (default: 0, max: 3
 apiClient.SetRetryDelay(1500);        // Wait 1.5 seconds between retries (default: 1000ms)
 
 var queryOptions = new SpellCheckerQueryOptions {
-    Text = "I neeed to call my friend on telephine today!"
+    Text = "I neeed to call my friend on telephine today!",
+    Autocorrect = true,
+    Offsets = true
 };
 
 var response = await apiClient.ExecuteAsync(queryOptions);
@@ -346,7 +362,9 @@ The API client implements `IDisposable` for proper resource cleanup:
 
 ```csharp
 var queryOptions = new SpellCheckerQueryOptions {
-    Text = "I neeed to call my friend on telephine today!"
+    Text = "I neeed to call my friend on telephine today!",
+    Autocorrect = true,
+    Offsets = true
 };
 
 using (var apiClient = new SpellCheckerAPIClient("[YOUR_API_KEY]"))
@@ -368,6 +386,7 @@ using (var apiClient = new SpellCheckerAPIClient("[YOUR_API_KEY]"))
   "data": {
     "spellPass": false,
     "mispellingsFound": 2,
+    "totalOccurrences": 2,
     "corrections": [
       {
         "word": "neeed",
@@ -377,6 +396,13 @@ using (var apiClient = new SpellCheckerAPIClient("[YOUR_API_KEY]"))
           "needy",
           "Neel",
           "needs"
+        ],
+        "occurrences": 1,
+        "offsets": [
+          {
+            "start": 2,
+            "end": 7
+          }
         ]
       },
       {
@@ -387,9 +413,17 @@ using (var apiClient = new SpellCheckerAPIClient("[YOUR_API_KEY]"))
           "telephoner",
           "telephones",
           "telephony"
+        ],
+        "occurrences": 1,
+        "offsets": [
+          {
+            "start": 29,
+            "end": 38
+          }
         ]
       }
-    ]
+    ],
+    "correctedText": "I needed to call my friend on telephone today!"
   }
 }
 ```

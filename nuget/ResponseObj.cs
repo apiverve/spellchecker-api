@@ -38,8 +38,14 @@ namespace APIVerve.API.SpellChecker
         [JsonProperty("mispellingsFound")]
         public long? MispellingsFound { get; set; }
 
+        [JsonProperty("totalOccurrences")]
+        public long? TotalOccurrences { get; set; }
+
         [JsonProperty("corrections")]
         public Correction[] Corrections { get; set; }
+
+        [JsonProperty("correctedText")]
+        public string CorrectedText { get; set; }
     }
 
     public partial class Correction
@@ -49,6 +55,21 @@ namespace APIVerve.API.SpellChecker
 
         [JsonProperty("suggestions")]
         public string[] Suggestions { get; set; }
+
+        [JsonProperty("occurrences")]
+        public long? Occurrences { get; set; }
+
+        [JsonProperty("offsets")]
+        public Offset[] Offsets { get; set; }
+    }
+
+    public partial class Offset
+    {
+        [JsonProperty("start")]
+        public long? Start { get; set; }
+
+        [JsonProperty("end")]
+        public long? End { get; set; }
     }
 
     public partial class Premium
