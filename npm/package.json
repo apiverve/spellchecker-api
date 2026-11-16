@@ -1,6 +1,6 @@
 {
   "name": "@apiverve/spellchecker",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "Spell Checker flags misspelled words in submitted English text and generates correction suggestions. It counts total spelling errors, lists possible replacements for each mistaken word, and can return the text with the top suggestions applied, plus on paid plans the character offsets of every misspelling.",
   "main": "index.js",
   "types": "index.d.ts",
